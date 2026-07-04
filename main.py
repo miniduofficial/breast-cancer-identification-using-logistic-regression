@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.datasets import load_breast_cancer
 from data_utils import *
 from model import *
+from visualize import learning_curve
 
 #Loading the breast cancer dataset from scikit learn
 data = load_breast_cancer()
@@ -30,8 +31,10 @@ X_test_norm = normalize(X_test, mean, std)
 w = np.zeros(X_train_norm.shape[1])
 b = 0
 
-print(w, b)
+w, b, cost_log = reg_grad_desc(w, b, X_train_norm, y_train, 1000, 10.25, 0.01)
 
-w, b = reg_grad_desc(w, b, X_train_norm, y_train, 1000, 0.01, 0.01)
+learning_curve_plot_request = input("Do you wish to see the learning curve? (Y/n)\n")
+learning_curve_plot_request.lower().replace(" ","")
 
-print(w, b)
+if learning_curve_plot_request == "y":
+    learning_curve(np.arange(len(cost_log)), cost_log)
