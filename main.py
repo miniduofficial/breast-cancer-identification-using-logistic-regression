@@ -34,7 +34,7 @@ b = 0
 w, b, cost_log = reg_grad_desc(w, b, X_train_norm, y_train, 1000, 10.25, 0.01)
 
 learning_curve_plot_request = input("Do you wish to see the learning curve? (Y/n)\n")
-learning_curve_plot_request.lower().replace(" ","")
+learning_curve_plot_request = learning_curve_plot_request.lower().strip()
 
 if learning_curve_plot_request == "y":
     learning_curve(np.arange(len(cost_log)), cost_log)
